@@ -1,0 +1,773 @@
+/* ============================================
+   LOGIN - DISEÑO PROFESIONAL CON ANIMACIONES
+   Arepa la Llanerita - Colores Corporativos
+   ============================================ */
+
+:root {
+    /* Colores Corporativos */
+    --arepa-primary: #722F37;
+    --arepa-accent: #8B4B52;
+    --arepa-light-burgundy: #A85D65;
+    --arepa-dark-burgundy: #5A252B;
+    --arepa-cream: #FFF8F8;
+    --white: #FFFFFF;
+}
+
+/* Diseño horizontal completo con animaciones */
+.login-wrapper {
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Panel izquierdo - Información de la empresa */
+.brand-panel {
+    background: linear-gradient(135deg, var(--arepa-primary) 0%, var(--arepa-accent) 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.brand-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="arepa-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23arepa-pattern)"/></svg>');
+    opacity: 0.5;
+}
+
+.brand-content {
+    text-align: center;
+    z-index: 1;
+    max-width: 400px;
+    animation: fadeInLeft 0.8s ease-out 0.2s backwards;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.brand-logo {
+    width: 130px;
+    height: 130px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.brand-logo:hover {
+    animation: none;
+    transform: scale(1.1) rotate(5deg);
+}
+
+.brand-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+}
+
+.brand-subtitle {
+    font-size: 1.1rem;
+    font-weight: 400;
+    opacity: 0.95;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.brand-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.brand-features li {
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    opacity: 0.9;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideInFeature 0.6s ease-out backwards;
+}
+
+.brand-features li:nth-child(1) { animation-delay: 0.4s; }
+.brand-features li:nth-child(2) { animation-delay: 0.5s; }
+.brand-features li:nth-child(3) { animation-delay: 0.6s; }
+.brand-features li:nth-child(4) { animation-delay: 0.7s; }
+.brand-features li:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes slideInFeature {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 0.9;
+        transform: translateX(0);
+    }
+}
+
+.brand-features li:hover {
+    opacity: 1;
+    transform: translateX(10px) scale(1.02);
+    background: rgba(255, 255, 255, 0.1);
+    padding-left: 0.8rem;
+    border-radius: 8px;
+}
+
+.brand-features i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Panel derecho - Formulario de login */
+.login-panel {
+    background: linear-gradient(135deg, var(--arepa-cream) 0%, #f1f1f1 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    min-height: 100vh;
+}
+
+.login-content {
+    width: 100%;
+    max-width: 580px;
+    padding: 0 2rem;
+    animation: fadeInRight 0.8s ease-out 0.3s backwards;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.login-card {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+    padding: 3.5rem;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+}
+
+.login-card:hover {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.login-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--arepa-primary);
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-subtitle {
+    color: #4a5568;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-floating {
+    position: relative;
+}
+
+.form-floating > .form-control {
+    height: 70px;
+    border-radius: 16px;
+    border: 3px solid #e2e8f0;
+    padding: 1.5rem 1.75rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.form-floating > .form-control:focus {
+    border-color: var(--arepa-primary);
+    background: white;
+    box-shadow: 0 0 0 0.3rem rgba(114, 47, 55, 0.2), 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px) scale(1.01);
+    animation: inputFocus 0.3s ease-out;
+}
+
+@keyframes inputFocus {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-3px) scale(1.02);
+    }
+    100% {
+        transform: translateY(-2px) scale(1.01);
+    }
+}
+
+.form-floating > label {
+    color: #4a5568;
+    font-weight: 600;
+    padding: 1.5rem 1.75rem;
+    font-size: 1.1rem;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--arepa-primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.form-check {
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.form-check-input {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 1.2rem;
+    border-radius: 8px;
+    border: 3px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.form-check-input:checked {
+    background-color: var(--arepa-primary);
+    border-color: var(--arepa-primary);
+    box-shadow: 0 4px 12px rgba(114, 47, 55, 0.3);
+}
+
+.form-check-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #4a5568;
+    cursor: pointer;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, var(--arepa-primary) 0%, var(--arepa-accent) 100%);
+    border: none;
+    padding: 1.4rem 2.5rem;
+    font-weight: 700;
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.3rem;
+    width: 100%;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 20px rgba(114, 47, 55, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-login::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-login:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-login:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(114, 47, 55, 0.4);
+    background: linear-gradient(135deg, var(--arepa-accent) 0%, var(--arepa-primary) 100%);
+}
+
+.btn-login:active {
+    transform: translateY(-1px) scale(0.98);
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        box-shadow: 0 0 0 0 rgba(114, 47, 55, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 0 20px rgba(114, 47, 55, 0);
+    }
+}
+
+.login-links {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-links a {
+    color: var(--arepa-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.login-links a:hover {
+    color: white;
+    background: var(--arepa-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(114, 47, 55, 0.3);
+}
+
+.demo-users {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 18px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.demo-users h6 {
+    color: #4a5568;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.demo-user-btn {
+    display: block;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.demo-user-btn:hover {
+    background: var(--arepa-primary);
+    border-color: var(--arepa-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.2);
+    text-decoration: none;
+}
+
+.demo-user-btn i {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.demo-user-role {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    font-weight: 400;
+    margin-top: 0.2rem;
+}
+
+/* Responsive Design */
+
+/* Pantallas grandes (Desktop) */
+@media (min-width: 1200px) {
+    .brand-logo {
+        width: 170px;
+        height: 170px;
+    }
+
+    .brand-title {
+        font-size: 3rem;
+    }
+
+    .brand-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .login-content {
+        max-width: 650px;
+    }
+
+    .login-title {
+        font-size: 3.2rem;
+    }
+
+    .login-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .form-floating > .form-control {
+        height: 75px;
+        font-size: 1.3rem;
+    }
+
+    .form-floating > label {
+        font-size: 1.2rem;
+    }
+
+    .btn-login {
+        font-size: 1.4rem;
+        padding: 1.6rem 3rem;
+    }
+}
+
+/* Pantallas medianas (Tablets horizontales) */
+@media (max-width: 1199.98px) and (min-width: 992px) {
+    .brand-logo {
+        width: 140px;
+        height: 140px;
+    }
+
+    .brand-title {
+        font-size: 2.4rem;
+    }
+
+    .brand-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .brand-features li {
+        font-size: 1rem;
+    }
+
+    .login-title {
+        font-size: 2.4rem;
+    }
+
+    .login-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .form-floating > .form-control {
+        height: 65px;
+        font-size: 1.1rem;
+    }
+
+    .btn-login {
+        font-size: 1.2rem;
+        padding: 1.3rem 2.2rem;
+    }
+}
+
+/* Tablets verticales */
+@media (max-width: 991.98px) and (min-width: 768px) {
+    .login-wrapper {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .brand-panel {
+        min-height: 40vh;
+        padding: 2rem 1rem;
+    }
+
+    .brand-logo {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 1rem;
+    }
+
+    .brand-title {
+        font-size: 2rem;
+    }
+
+    .brand-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .brand-features {
+        display: none;
+    }
+
+    .login-panel {
+        min-height: 60vh;
+        padding: 2rem 1.5rem;
+    }
+
+    .login-content {
+        padding: 0 1rem;
+    }
+
+    .login-title {
+        font-size: 2.2rem;
+    }
+
+    .login-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .form-floating > .form-control {
+        height: 60px;
+        font-size: 1.1rem;
+    }
+
+    .btn-login {
+        font-size: 1.1rem;
+        padding: 1.2rem 2rem;
+    }
+}
+
+/* Móviles */
+@media (max-width: 767.98px) {
+    .login-wrapper {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .brand-panel {
+        min-height: 35vh;
+        padding: 1.5rem 1rem;
+    }
+
+    .brand-logo {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 1rem;
+    }
+
+    .brand-title {
+        font-size: 1.8rem;
+    }
+
+    .brand-subtitle {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .brand-features {
+        display: none;
+    }
+
+    .login-panel {
+        min-height: 65vh;
+        padding: 1.5rem 1rem;
+    }
+
+    .login-content {
+        padding: 0 0.5rem;
+    }
+
+    .login-header {
+        margin-bottom: 2rem;
+    }
+
+    .login-title {
+        font-size: 1.8rem;
+    }
+
+    .login-subtitle {
+        font-size: 1rem;
+    }
+
+    .form-floating > .form-control {
+        height: 58px;
+        font-size: 1rem;
+        padding: 1.2rem 1.4rem;
+    }
+
+    .form-floating > label {
+        font-size: 1rem;
+        padding: 1.2rem 1.4rem;
+    }
+
+    .btn-login {
+        font-size: 1.1rem;
+        padding: 1.1rem 2rem;
+    }
+
+    .form-check-input {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+
+    .form-check-label {
+        font-size: 1rem;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 575.98px) {
+    .brand-title {
+        font-size: 1.6rem;
+    }
+
+    .brand-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .login-title {
+        font-size: 1.6rem;
+    }
+
+    .login-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .form-floating > .form-control {
+        height: 55px;
+        font-size: 0.95rem;
+        padding: 1rem 1.2rem;
+    }
+
+    .form-floating > label {
+        font-size: 0.9rem;
+        padding: 1rem 1.2rem;
+    }
+
+    .btn-login {
+        font-size: 1rem;
+        padding: 1rem 1.8rem;
+    }
+
+    .form-check-input {
+        width: 1.3rem;
+        height: 1.3rem;
+    }
+
+    .login-links a {
+        font-size: 1rem;
+    }
+}
+/* Estilos para botón de mostrar/ocultar contraseña */
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+    background: none;
+    border: none;
+    color: #6c757d;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-top: -3px;
+}
+
+.password-toggle:hover {
+    color: var(--arepa-primary);
+    background: rgba(114, 47, 55, 0.1);
+    border: none;
+}
+
+.password-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(114, 47, 55, 0.2);
+    background: rgba(114, 47, 55, 0.1);
+    border: none;
+    color: var(--arepa-primary);
+}
+
+.password-toggle i {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+/* Contenedor con posición relativa */
+.form-floating.position-relative {
+    position: relative !important;
+    display: block !important;
+}
+
+/* Ajustar padding del input cuando hay botón toggle */
+.form-floating.position-relative > .form-control {
+    padding-right: 4rem !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ajustar label cuando hay icono */
+.form-floating.position-relative > label {
+    padding-right: 4rem !important;
+    z-index: 2;
+}
+
+/* Asegurar que el label no se superponga con el icono cuando está activo */
+.form-floating.position-relative > .form-control:focus ~ label,
+.form-floating.position-relative > .form-control:not(:placeholder-shown) ~ label {
+    padding-right: 4rem !important;
+}
