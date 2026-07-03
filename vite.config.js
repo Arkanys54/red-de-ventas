@@ -24,7 +24,7 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    'vendor': ['bootstrap', 'alpinejs'],
+                    'vendor': ['bootstrap'],
                 },
             },
         },
