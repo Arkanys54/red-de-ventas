@@ -69,10 +69,10 @@ class UserSeeder extends Seeder
             'apellidos' => 'Lopez',
             'cedula' => '11223344',
             'email' => 'ana.lopez@arepallanerita.com',
-            'password' => Hash::make(''),
+            'password' => Hash::make('vendedor123'),
             'telefono' => '3011234567',
             'direccion' => 'Carrera 20 #8-15',
-            'ciudad' => 'Villavicencio',vendedor123
+            'ciudad' => 'Villavicencio',
             'departamento' => 'Meta',
             'fecha_nacimiento' => '1990-08-20',
             'rol' => 'vendedor',
