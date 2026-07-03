@@ -12,14 +12,8 @@ export default defineConfig({
         }),
     ],
     build: {
-        // Optimización para producción
-        minify: 'terser',
-        terserOptions: {
-            compress: {
-                drop_console: true,
-                drop_debugger: true,
-            },
-        },
+        // Optimización para producción (esbuild va integrado en Vite, sin dependencias extra)
+        minify: 'esbuild',
         // Chunk splitting para mejor caching
         rollupOptions: {
             output: {
