@@ -1,20 +1,15 @@
-# Imagen para desplegar la app Laravel 12 + MongoDB (Railway / Render / cualquier host Docker).
-# Controla el entorno para garantizar las extensiones que faltan en los builders por defecto.
+# Imagen para desplegar la app Laravel 12 + MongoDB (Render / Railway / cualquier host Docker).
+# Controla el entorno para garantizar todas las extensiones de PHP que la app necesita.
 FROM php:8.2-cli
 
-# Dependencias del sistema + herramientas para compilar extensiones
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    git unzip curl pkg-config \
-    libzip-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libssl-dev \
-    $PHPIZE_DEPS \
+# Instalador oficial de extensiones: resuelve dependencias del sistema automáticamente.
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions mongodb gd zip bcmath exif mbstring pcntl intl
+
+# Herramientas del sistema (git para composer, curl para node)
+RUN apt-get update && apt-get install -y --no-install-recommends git unzip curl \
     && rm -rf /var/lib/apt/lists/*
-
-# Extensiones de PHP (gd/zip/bcmath/exif para intervention/image, dompdf, phpword)
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" gd zip bcmath exif
-
-# Extensión MongoDB (requerida por mongodb/laravel-mongodb)
-RUN pecl install mongodb && docker-php-ext-enable mongodb
 
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -27,13 +22,18 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 WORKDIR /app
 COPY . .
 
-# Dependencias de PHP (producción) y build del frontend
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Dependencias PHP (producción). --no-scripts evita que package:discover corra en el build.
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+
+# Frontend
 RUN npm ci && npm run build
 
-# Permisos de escritura que Laravel necesita
+# Genera el manifiesto de paquetes (equivalente a lo que hace el script omitido)
+RUN php artisan package:discover --ansi || true
+
+# Permisos de escritura de Laravel
 RUN chmod -R 775 storage bootstrap/cache
 
-# Railway/Render inyectan el puerto en $PORT
+# Render/Railway inyectan el puerto en $PORT
 EXPOSE 8000
 CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
