@@ -458,7 +458,7 @@ class EquipoController extends Controller
             ->map(function($pedido) {
                 return [
                     'tipo' => 'venta',
-                    'descripcion' => "Venta a {$pedido->cliente->name}",
+                    'descripcion' => 'Venta a ' . ($pedido->cliente?->name ?? 'cliente'),
                     'monto' => to_float($pedido->total_final),
                     'fecha' => $pedido->created_at
                 ];
