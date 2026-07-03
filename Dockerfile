@@ -4,8 +4,10 @@ FROM php:8.2-cli
 
 # Instalador oficial de extensiones: resuelve dependencias del sistema automáticamente.
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+# ext-mongodb fijada a 1.21 para coincidir con mongodb/mongodb 1.21.x del composer.lock
+# (la serie 2.x no es compatible con esa versión bloqueada de la librería).
 RUN chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions mongodb gd zip bcmath exif mbstring pcntl intl
+    install-php-extensions mongodb-1.21.1 gd zip bcmath exif mbstring pcntl intl
 
 # Herramientas del sistema (git para composer, curl para node)
 RUN apt-get update && apt-get install -y --no-install-recommends git unzip curl \
