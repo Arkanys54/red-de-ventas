@@ -1,0 +1,13 @@
+.git
+.gitignore
+.gitattributes
+node_modules
+vendor
+Documentación
+storage/logs
+.env
+.env.local.backup
+.env.backup
+.env.production
+tests
+*.md
